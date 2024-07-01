@@ -1,6 +1,5 @@
 /*ERRORES:
-  -PROBLEMA CON ASKUSER DE CHAR, si pones cadena de chars como respuesta te salta el error varias veces
-  -Poder elegir quien coloca primero
+  -hacer funcionar la funcion condicion con direcciones y no strings
   -Si tiene una sola dimension, al elegir una fila o columna ya ocupada(dependiendo del eje de la 
   dimension), que detecte que ya es casilla ocupada
   -Crear tests a saco
@@ -27,6 +26,10 @@ int main(){
 
   tabla_main.assign(n_filas, vector<char> (n_columnas, ' '));
   AskUser<string>("juegas el primer turno?(y/n)", first, "first", "entrada no válida");
+  if(first == "n"){
+    ColocarCPU();
+    Imprimir();
+  }
 
   while(!(Comprobar())){
     Preguntar();
