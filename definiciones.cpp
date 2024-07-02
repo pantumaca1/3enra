@@ -31,7 +31,6 @@ bool condicion(string arg){
     return (!(columna_pos <= tabla_main[0].size() && columna_pos > 0));
   }
   else{
-    //cout << "error" << endl;
     return false;
   }
 }
@@ -82,9 +81,14 @@ void Preguntar(){
   bool primera_iteracion{true};
   do{
     if(!primera_iteracion){ cout << "casilla ya cogida \n"; }
-    AskUser<int>("fila: ", fila_pos, "fila_pos", "fila fuera de rango");
-    AskUser<int>("columna: ", columna_pos, "columna_pos", "columna fuera de rango");
     primera_iteracion = false;
+    AskUser<int>("fila: ", fila_pos, "fila_pos", "fila fuera de rango");
+    if(tabla_main[0].size() == 1 && (tabla_main[fila_pos - 1][0] == 'X' || tabla_main[fila_pos - 1][0] == 'O')){
+      primera_iteracion = true;
+      cout << "fila ya cogida \n";
+      continue;
+    }
+    AskUser<int>("columna: ", columna_pos, "columna_pos", "columna fuera de rango");
   }
   while(tabla_main[fila_pos - 1][columna_pos - 1] == 'X' || tabla_main[fila_pos - 1][columna_pos - 1] == 'O');
   ColocarFicha(fila_pos - 1, columna_pos - 1, tipo_jugador[0]);
@@ -112,70 +116,52 @@ bool Comprobar(){
       }
       if(i + 1 <= static_cast<int>(tabla_main.size() - (tamaño_raya - 1))){
         for(int suma = 1; suma < tamaño_raya; suma++){
-          if((tabla_main[i][j] == tabla_main[i + suma][j])){
-            resultado = true;
-          }
+          if((tabla_main[i][j] == tabla_main[i + suma][j])) resultado = true;
           else{
             resultado = false;
             break;
           }
         }
-        if(resultado){
-          return resultado;
-        }
+        if(resultado) return resultado;
       }
 
       if(j + 1 <= static_cast<int>(tabla_main[0].size() - (tamaño_raya - 1))){
         for(int suma = 1; suma <= (tamaño_raya - 1); suma++){
-          if((tabla_main[i][j] == tabla_main[i][j + suma])){
-            resultado = true;
-          }
+          if((tabla_main[i][j] == tabla_main[i][j + suma])) resultado = true;
           else{
             resultado = false;
             break;
           }
         }
-        if(resultado){
-          return resultado;
-        }
+        if(resultado) return resultado;
       }
 
       if(i + 1 <= static_cast<int>(tabla_main.size() - (tamaño_raya - 1)) 
          && j + 1 <= static_cast<int>(tabla_main[0].size() - (tamaño_raya - 1))){
         for(int suma = 1; suma <= (tamaño_raya - 1); suma++){
-          if((tabla_main[i][j] == tabla_main[i + suma][j + suma])){
-            resultado = true;
-          }
+          if((tabla_main[i][j] == tabla_main[i + suma][j + suma])) resultado = true;
           else{
             resultado = false;
             break;
           }
         }
-        if(resultado){
-          return resultado;
-        }
+        if(resultado) return resultado;
       }
 
       if(i + 1 <= static_cast<int>(tabla_main.size() - (tamaño_raya - 1))
          && j + 1 >= tamaño_raya){
         for(int suma = 1; suma < tamaño_raya; suma++){
-          if((tabla_main[i][j] == tabla_main[i + suma][j - suma])){
-            resultado = true;
-          }
+          if((tabla_main[i][j] == tabla_main[i + suma][j - suma])) resultado = true;
           else{
             resultado = false;
             break;
           }
         }
-        if(resultado){
-          return resultado;
-        }
+        if(resultado) return resultado;
       }
     }
   }
-  if(tabla_llena){
-    return true;
-  }
+  if(tabla_llena) return true;
   return false;
 }
 

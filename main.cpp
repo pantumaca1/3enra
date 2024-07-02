@@ -1,7 +1,6 @@
 /*ERRORES:
+  -al terminar poner si has ganau perdiu o empatau
   -hacer funcionar la funcion condicion con direcciones y no strings
-  -Si tiene una sola dimension, al elegir una fila o columna ya ocupada(dependiendo del eje de la 
-  dimension), que detecte que ya es casilla ocupada
   -Crear tests a saco
 
   -Implementar el minimax
